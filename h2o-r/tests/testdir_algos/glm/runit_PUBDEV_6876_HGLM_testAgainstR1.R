@@ -9,9 +9,14 @@ library(hglm)
 test.HGLMData1 <- function() {
   browser()
   data(semiconductor)
+  # m11 <- hglm(fixed = y ~ x1 + x3 + x5 + x6,
+  #             random = ~ 1|Device,
+  #             family = Gamma(link = log),
+  #             disp = ~ x2 + x3, data = semiconductor)
   m11 <- hglm(fixed = y ~ x1 + x3 + x5 + x6,
               random = ~ 1|Device,
-              family = Gamma(link = log),
+              family=gaussian(link="identity"), 
+              rand.family=gaussian(link="identity"),
               disp = ~ x2 + x3, data = semiconductor)
   summary(m11)
   plot(m11, cex = .6, pch = 1,
